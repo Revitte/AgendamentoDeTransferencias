@@ -3,9 +3,12 @@ package com.jazz.agendamento.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.jazz.agendamento.entity.Transferencia;
 import com.jazz.agendamento.repository.TransferenciaRepository;
 
+@Service
 public class TransferenciaService {
     private final TransferenciaRepository transferenciaRepository;
 
