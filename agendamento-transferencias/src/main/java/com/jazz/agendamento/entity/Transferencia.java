@@ -13,6 +13,10 @@ public class Transferencia {
     private BigDecimal valor;
     private LocalDateTime dataAgendamento;
     private String status;
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
     
     @ManyToOne
     @JoinColumn(name = "conta_origem_id")
