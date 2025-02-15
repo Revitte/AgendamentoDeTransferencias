@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import com.jazz.agendamento.entity.Transferencia;
 import com.jazz.agendamento.services.TransferenciaService;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/transferencias")
 public class TransferenciaController {
