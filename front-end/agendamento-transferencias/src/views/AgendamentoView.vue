@@ -86,14 +86,15 @@ export default {
     },
     calcularTaxa() {
       const hoje = new Date();
+      hoje.setHours(0, 0, 0, 0);
       const dataTransferencia = new Date(this.transferencia.dataTransferencia);
-      //Calculo que usei para converter a data em milissegundos e arredondar para baixo
-      const diferencaDias = Math.floor((dataTransferencia - hoje) / (1000 * 60 * 60 * 24));
+      dataTransferencia.setHours(0, 0, 0, 0);
+      const diferencaDias = Math.ceil((dataTransferencia - hoje) / (1000 * 60 * 60 * 24));
 
       let taxa = 0;
       let valorFixo = 0;
 
-      if (diferencaDias >= 0 && diferencaDias <= 0) { taxa = 2.5; valorFixo = 3; }
+      if (diferencaDias >= 0 ) { taxa = 2.5; valorFixo = 3; }
       else if (diferencaDias >= 1 && diferencaDias <= 10) { taxa = 0; valorFixo = 12; }
       else if (diferencaDias >= 11 && diferencaDias <= 20) { taxa = 8.2; valorFixo = 0; }
       else if (diferencaDias >= 21 && diferencaDias <= 30) { taxa = 6.9; valorFixo = 0; }
