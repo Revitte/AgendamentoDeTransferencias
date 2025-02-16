@@ -32,5 +32,8 @@ public class Transferencia {
     @JoinColumn(name = "conta_destino_id")
     private ContaBancaria contaDestino;
     
-    // Getters e Setters
+    @PrePersist
+    public void prePersist() {
+        this.dataAgendamento = LocalDateTime.now(); // Define a data de agendamento no momento do cadastro
+    }
 }

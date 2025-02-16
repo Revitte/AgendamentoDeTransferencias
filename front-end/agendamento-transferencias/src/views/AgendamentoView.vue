@@ -56,7 +56,10 @@
 
       <ul v-if="transferenciasAgendadas.length" class="mt-4 bg-gray-200 p-4 rounded-lg">
         <li v-for="(t, index) in transferenciasAgendadas" :key="index" class="border-b py-2">
-          Conta Origem: {{ t.contaOrigem }} - Conta Destino: {{ t.contaDestino }} - Valor: {{ t.valor }} - Data: {{ t.dataTransferencia }}
+            <strong>Origem:</strong> {{ t.contaOrigem || 'N/A' }} - 
+            <strong>Destino:</strong> {{ t.contaDestino || 'N/A' }} - 
+            <strong>Valor:</strong> R$ {{ t.valor }} - 
+            <strong>Data Transferência:</strong> {{ t.dataAgendamento }}
         </li>
       </ul>
     </div>
@@ -68,11 +71,10 @@ import axios from "axios";
 export default {
   data() {
     return {
-      transferencia: {
-        contaOrigem: "",
-        contaDestino: "",
+    transferencia: {
         valor: 0,
         dataTransferencia: "",
+        status: "AGENDADA"
       },
       mensagem: "",
       transferenciasAgendadas: [],
@@ -113,17 +115,35 @@ export default {
         this.mensagem = "Erro: Não há taxa aplicável para esta data de transferência.";
         return;
       }
-
+      const transferenciaData = {
+        valor: this.transferencia.valor,
+        dataTransferencia: this.transferencia.dataTransferencia,
+        status: "AGENDADA",
+      };
       try {
-        this.mensagem = `Transferência agendada com sucesso! Taxa: R$ ${resultadoTaxa.taxa}`;
+        const response = await axios.post("http://localhost:8080/transferencias", transferenciaData, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+        });
+
+        if (response.status === 201 || response.status === 200) {
+            this.mensagem = `Transferência agendada com sucesso! Taxa: R$ ${resultadoTaxa.taxa}`;
+            this.transferencia.valor = 0;
+            this.transferencia.contaOrigem = "";
+            this.transferencia.contaDestino = "";
+
+            this.buscarTransferencias();
+        }
       } catch (error) {
+        console.error("Erro ao agendar transferência:", error);
         this.mensagem = "Erro ao agendar transferência!";
       }
     },
     async buscarTransferencias() {
       try {
-        const response = await axios.get("http://localhost:8080/api/transferencias");
-        this.transferenciasAgendadas = response.data;
+        const response = await axios.get("http://localhost:8080/transferencias");
+        this.transferenciasAgendadas = response.data;   
       } catch (error) {
         console.error("Erro ao buscar transferências", error);
       }
