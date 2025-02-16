@@ -1,7 +1,7 @@
 # Documentação do Projeto: Agendamento de Transferências Financeiras
 
 ## Visão Geral
-O projeto **Agendamento de Transferências Financeiras** é um sistema que permite aos usuários agendarem transferências bancárias para datas futuras, aplicando regras de taxa conforme a data de transferência. A aplicação é desenvolvida utilizando **Java 11, Spring Boot e Vue.js**, com uma arquitetura baseada em **API REST** para comunicação entre o backend e o frontend.
+O projeto **Agendamento de Transferências Financeiras** é um sistema que permite aos usuários agendarem transferências bancárias para datas futuras, aplicando regras de taxa conforme a data de transferência. A aplicação é desenvolvida utilizando **Java 21, Spring Boot e Vue.js**, com uma arquitetura baseada em **API REST** para comunicação entre o backend e o frontend.
 
 ## Objetivos
 - Criar um sistema que permita o agendamento de transferências financeiras.
@@ -14,7 +14,7 @@ O projeto **Agendamento de Transferências Financeiras** é um sistema que permi
 # Arquitetura do Projeto
 
 ## Backend
-- **Linguagem**: Java 17
+- **Linguagem**: Java 21
 - **Framework**: Spring Boot
 - **Banco de Dados**: H2 (para persistência em memória durante o desenvolvimento)
 - **Estrutura de Pacotes**:
